@@ -25,21 +25,21 @@ it("Should not login with empty password", () => {
     .should('be.false');
 });
 
-it("Should open the book", function () {
+it("Should open the book", () => {
   cy.visit('/');
   cy.login('test@test.com', 'test');
   cy.get('.card-body').click();
   cy.contains('Dowload book').should('be.visible');
 });
 
-it("Add the book to favorite", function () {
+it("Add the book to favorite", () => {
   cy.visit('/');
   cy.login('test@test.com', 'test');
   cy.contains('Add to favorite').click();
   cy.contains('Delete from favorite').should('be.visible');
 });
 
-it("Delete the book from favorite", function () {
+it("Delete the book from favorite", () => {
   cy.visit('/');
   cy.login('test@test.com', 'test');
   cy.contains('Favorites').click();
