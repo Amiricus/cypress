@@ -12,7 +12,7 @@ it("Should successfully login", () => {
 it("Should not login with empty email", () => {
   cy.visit('/');
   cy.login(' ', 'test');
-  cy.get("#mail")
+  cy.get('#mail')
     .then(($el) => $el[0].checkValidity())
     .should('be.false');
 });
@@ -20,7 +20,29 @@ it("Should not login with empty email", () => {
 it("Should not login with empty password", () => {
   cy.visit('/');
   cy.login('test@test.com');
-  cy.get("#pass")
+  cy.get('#pass')
     .then(($el) => $el[0].checkValidity())
     .should('be.false');
+});
+
+it("Should open the book", function () {
+  cy.visit('/');
+  cy.login('test@test.com', 'test');
+  cy.get('.card-body').click();
+  cy.contains('Dowload book').should('be.visible');
+});
+
+it("Add the book to favorite", function () {
+  cy.visit('/');
+  cy.login('test@test.com', 'test');
+  cy.contains('Add to favorite').click();
+  cy.contains('Delete from favorite').should('be.visible');
+});
+
+it("Delete the book from favorite", function () {
+  cy.visit('/');
+  cy.login('test@test.com', 'test');
+  cy.contains('Favorites').click();
+  cy.contains('Delete from favorite').click();
+  cy.contains('Please add some book to favorit on home page!').should('be.visible');
 });
